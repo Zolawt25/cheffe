@@ -43,7 +43,7 @@ const AddBlogPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/blogs", {
+      await axios.post("https://cheffe-server.vercel.app/blogs", {
         image,
         title,
         content,

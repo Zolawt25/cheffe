@@ -11,7 +11,7 @@ const BlogPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/blogs");
+        const res = await axios.get("https://cheffe-server.vercel.app/blogs");
         setBlogs(res.data);
         setLoading(false);
       } catch (error) {

@@ -13,7 +13,9 @@ const BlogDetailPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:5000/blogs/${id}`);
+        const res = await axios.get(
+          `https://cheffe-server.vercel.app/blogs/${id}`
+        );
         setBlog(res.data);
         setLoading(false);
       } catch (error) {
@@ -26,7 +28,7 @@ const BlogDetailPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.put(`http://localhost:5000/blogs/${id}`, {
+      await axios.put(`https://cheffe-server.vercel.app/blogs/${id}`, {
         views: blog.views + 1,
       });
     };
@@ -39,7 +41,9 @@ const BlogDetailPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/blogs/recent");
+      const res = await axios.get(
+        "https://cheffe-server.vercel.app/blogs/recent"
+      );
       setRecentBlog(res.data);
       setLoading(false);
     };

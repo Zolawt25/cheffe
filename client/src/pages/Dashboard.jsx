@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/blogs");
+      const res = await axios.get("https://cheffe-server.vercel.app/blogs");
       setBlogs(res.data);
       setLoading(false);
     };
@@ -21,7 +21,9 @@ const Dashboard = () => {
 
   const deleteBlog = async (id) => {
     setBtnLoading(true);
-    const res = await axios.delete(`http://localhost:5000/blogs/${id}`);
+    const res = await axios.delete(
+      `https://cheffe-server.vercel.app/blogs/${id}`
+    );
     setdeleted(!deleted);
     setBtnLoading(false);
     return res;

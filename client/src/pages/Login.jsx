@@ -13,10 +13,13 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/users/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://cheffe-server.vercel.app/users/login",
+        {
+          username,
+          password,
+        }
+      );
       sessionStorage.setItem("user_token", res.data);
       setLoading(false);
       navigate("/dashboard");

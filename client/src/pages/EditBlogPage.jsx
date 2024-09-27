@@ -16,7 +16,9 @@ const EditBlogPage = () => {
   console.log(blog);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/blogs/${id}`);
+      const res = await axios.get(
+        `https://cheffe-server.vercel.app/blogs/${id}`
+      );
       setBlog(res.data);
       setContent(res.data.content);
     };
@@ -55,7 +57,7 @@ const EditBlogPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.put(`http://localhost:5000/blogs/${id}`, {
+      await axios.put(`https://cheffe-server.vercel.app/blogs/${id}`, {
         image: image ? image : blog.image,
         title: title ? title : blog.title,
         content: content ? content : blog.content,
