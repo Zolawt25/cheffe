@@ -1,6 +1,9 @@
 const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+var nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
   try {
@@ -31,6 +34,66 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
+});
+
+router.post("/forgot-password", (req, res) => {
+  const { email } = req.body;
+
+  // Create a dummy user id for the sake of this example
+  const id = "66f72f69d06926a36a2b46c1";
+
+  // Generate a JWT token with an expiration of 30 days
+  const token = jwt.sign({ id: id }, "efuweiuweoiwejf98r894309", {
+    expiresIn: "30d",
+  });
+
+  // Create the transporter for sending emails
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "zelalemt2525@gmail.com",
+      pass: "mejycibszbqrxpin",
+    },
+  });
+
+  // Define mail options (where to send, subject, and content)
+  var mailOptions = {
+    from: "zelalemt2525@gmail.com",
+    to: email, // Send to user's email
+    subject: "Reset your password",
+    text: `Click here to reset your password: http://localhost:5173/reset-password/${id}/${token}`,
+  };
+
+  // Send the email using the transporter
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error sending email", error });
+    } else {
+      console.log("Email sent: " + info.response);
+      return res.status(200).json({ message: "Email sent successfully" });
+    }
+  });
+});
+
+router.post("/reset-password/:id/:token", async (req, res) => {
+  const { id, token } = req.params;
+  const { password } = req.body;
+
+  try {
+    jwt.verify(token, "efuweiuweoiwejf98r894309", (err, decoded) => {
+      if (err) {
+        return res.json({ status: "error with token" });
+      } else {
+        bcrypt.hash(password, 10).then((hash) => {
+          user
+            .findByIdAndUpdate({ _id: id }, { password: hash })
+            .then((u) => res.send({ status: "success!" }))
+            .catch((err) => res.send({ status: err }));
+        });
+      }
+    });
+  } catch (error) {}
 });
 
 module.exports = router;

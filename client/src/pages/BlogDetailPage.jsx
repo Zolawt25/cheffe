@@ -7,7 +7,10 @@ const BlogDetailPage = () => {
   const [blog, setBlog] = useState({ comments: [] }); // Initialize blog with an empty comments array
   const [recentBlog, setRecentBlog] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [commentloading, setCommentLoading] = useState(false);
   const id = useLocation().pathname.split("/")[2];
+  const [username, setUsername] = useState("");
+  const [text, setText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +27,7 @@ const BlogDetailPage = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, commentloading]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +53,23 @@ const BlogDetailPage = () => {
     fetchData();
   }, []);
 
+  const addComment = async (e) => {
+    e.preventDefault();
+    try {
+      setCommentLoading(true);
+      await axios.post(
+        `https://cheffe-server.vercel.app/blogs/${id}/comments`,
+        {
+          username,
+          text,
+        }
+      );
+      setCommentLoading(false);
+    } catch (error) {
+      setCommentLoading(false);
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="text-center text-gray-50 bg-[image:url(/imgs/about03.png)] bg-cover bg-[#000000cd] bg-blend-darken bg-center py-28">
@@ -114,7 +134,7 @@ const BlogDetailPage = () => {
                     <p>No comments available.</p>
                   )}
                 </div>
-                <form className="mt-5">
+                <form className="mt-5" onSubmit={(e) => addComment(e)}>
                   <div className="mb-3">
                     <p className="text-sm text-gray-500 mb-2 font-semibold">
                       Your Name
@@ -122,6 +142,8 @@ const BlogDetailPage = () => {
                     <input
                       type="text"
                       className="w-full border rounded-sm py-1 px-2"
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -133,10 +155,12 @@ const BlogDetailPage = () => {
                       id=""
                       className="w-full border rounded-sm py-1 px-2"
                       rows={5}
+                      onChange={(e) => setText(e.target.value)}
+                      required
                     ></textarea>
                   </div>
                   <button className="bg-[#ffa216] px-6 py-2 uppercase text-sm text-gray-50 rounded">
-                    Submit Comment
+                    {commentloading ? "submitting" : "Submit Comment"}
                   </button>
                 </form>
               </div>

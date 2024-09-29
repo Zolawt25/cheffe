@@ -9,6 +9,7 @@ const blogPostSchema = new mongoose.Schema({
   likedBy: { type: [String], default: [] },
   comments: [
     {
+      _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
       username: { type: String },
       text: { type: String },
       createdAt: { type: Date, default: Date.now },

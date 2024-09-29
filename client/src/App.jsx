@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import AddBlogPage from "./pages/AddBlogPage";
 import EditBlogPage from "./pages/EditBlogPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 const App = () => {
   return (
     <div className="bg-blue-50">
@@ -18,6 +20,11 @@ const App = () => {
           <Route path="/blog/:id" element={<BlogDetailPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
           <Route path="/add-blog" element={<AddBlogPage />} />
           <Route path="/edit-blog/:id" element={<EditBlogPage />} />
         </Routes>
