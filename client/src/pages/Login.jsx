@@ -58,7 +58,10 @@ const Login = () => {
           {errorMsg && (
             <p className="text-xs text-red-600 mt-3 text-center">{errorMsg}</p>
           )}
-          <a href="/forgot-password" className="text-xs my-1 text-gray-600">
+          <a
+            href="/login/forgot-password"
+            className="text-xs my-1 text-gray-600"
+          >
             Forgot password?
           </a>
           <button className="text-center w-full rounded-full py-2 text-sm font-semibold text-gray-50 bg-[#ffa216] mt-4">

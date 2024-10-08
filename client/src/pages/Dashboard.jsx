@@ -41,7 +41,7 @@ const Dashboard = () => {
           </p>
           <div className="px-3 py-3 ">
             <a
-              href="/add-blog"
+              href="/dashboard/add-blog"
               className="bg-[#ffa216] px-3 py-1 uppercase text-sm text-gray-50"
             >
               create new blog post
@@ -63,6 +63,9 @@ const Dashboard = () => {
                     <div className="w-full text-center">Loading...</div>
                   ) : (
                     blogs.map((item, index) => {
+                      let date = new Date(item.createdAt)
+                        .toString()
+                        .slice(0, 16);
                       return (
                         <tr key={index} className="text-center">
                           <td className="flex justify-center">
@@ -73,11 +76,11 @@ const Dashboard = () => {
                             />
                           </td>
                           <td>{item.title}</td>
-                          <td>{item.createdAt}</td>
+                          <td>{date}</td>
                           <td>{item.views}</td>
                           <td>
                             <a
-                              href={`/edit-blog/${item._id}`}
+                              href={`/dashboard/edit-blog/${item._id}`}
                               className="bg-[#ffa216] px-6 py-1 uppercase text-sm text-gray-50 rounded mr-2"
                             >
                               edit

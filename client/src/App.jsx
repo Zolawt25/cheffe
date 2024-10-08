@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BlogPage from "./pages/BlogPage";
 import Footer from "./components/Footer";
@@ -16,17 +16,26 @@ const App = () => {
       <NavBar />
       <div className=" max-w-[1500px] mx-auto">
         <Routes>
-          <Route path="/" element={<BlogPage />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogDetailPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/login/forgot-password" element={<ForgotPassword />} />
           <Route
-            path="/reset-password/:id/:token"
+            path="/login/reset-password/:id/:token"
             element={<ResetPassword />}
           />
-          <Route path="/add-blog" element={<AddBlogPage />} />
-          <Route path="/edit-blog/:id" element={<EditBlogPage />} />
+          {sessionStorage.getItem("user_token") && (
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/add-blog" element={<AddBlogPage />} />
+              <Route
+                path="/dashboard/edit-blog/:id"
+                element={<EditBlogPage />}
+              />
+            </>
+          )}
+
+          <Route path="*" element={<Navigate to="/blog" />} />
         </Routes>
       </div>
 

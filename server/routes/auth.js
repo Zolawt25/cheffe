@@ -61,7 +61,7 @@ router.post("/forgot-password", (req, res) => {
     from: "zelalemt2525@gmail.com",
     to: email, // Send to user's email
     subject: "Reset your password",
-    text: `Click here to reset your password: http://localhost:5173/reset-password/${id}/${token}`,
+    text: `Click here to reset your password: https://cheffe.vercel.app/login/reset-password/${id}/${token}`,
   };
 
   // Send the email using the transporter

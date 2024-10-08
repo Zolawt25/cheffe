@@ -11,6 +11,7 @@ const BlogDetailPage = () => {
   const id = useLocation().pathname.split("/")[2];
   const [username, setUsername] = useState("");
   const [text, setText] = useState("");
+  let date = new Date(blog.createdAt).toString().slice(0, 16);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,9 +77,7 @@ const BlogDetailPage = () => {
         <h1 className="font-nunito sm:text-5xl text-3xl font-bold mb-3">
           {blog.title}
         </h1>
-        <p className="text-xs font-semibold mb-1">
-          Posted on: {blog.createdAt}
-        </p>
+        <p className="text-xs font-semibold mb-1">Posted on: {date}</p>
         <p className="text-xs uppercase">
           <span className="text-[#DB7607] mr-1">Home</span>/{" "}
           <span className="text-[#DB7607] mr-1">Home</span> / {blog.title}
@@ -95,9 +94,7 @@ const BlogDetailPage = () => {
               <h1 className="font-nunito sm:text-5xl text-3xl font-bold text-gray-950">
                 {blog.title}
               </h1>
-              <p className="text-sm text-gray-500 my-2">
-                Posted on {blog.createdAt}
-              </p>
+              <p className="text-sm text-gray-500 my-2">Posted on {date}</p>
               <div>
                 <img src={blog.image} alt="" />
               </div>
@@ -116,6 +113,9 @@ const BlogDetailPage = () => {
                 <div>
                   {blog.comments.length > 0 ? (
                     blog.comments.map((item, index) => {
+                      let date = new Date(item.createdAt)
+                        .toString()
+                        .slice(0, 16);
                       return (
                         <div className="mb-2 shadow-md p-2" key={index}>
                           <p className="text-sm font-bold text-gray-700">
@@ -124,9 +124,7 @@ const BlogDetailPage = () => {
                           <p className="text-sm text-gray-500 py-1">
                             {item.text}
                           </p>
-                          <p className="text-sm text-gray-500">
-                            {item.createdAt}
-                          </p>
+                          <p className="text-sm text-gray-500">{date}</p>
                         </div>
                       );
                     })

@@ -37,6 +37,7 @@ const BlogPage = () => {
       ) : (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 sm:px-20 px-10 gap-5 mt-10">
           {blogs.map((item, index) => {
+            let date = new Date(item.createdAt).toString().slice(0, 16);
             return (
               <div key={index} className="bg-white shadow">
                 <div>
@@ -47,7 +48,7 @@ const BlogPage = () => {
                     {item.title}
                   </p>
                   <p className="mt-1 text-sm text-gray-600">
-                    Posted on: {item.createdAt}
+                    Posted on: {date}
                   </p>
                   <p className="mt-1 mb-3 text-sm text-gray-600">
                     {item.likes} Likes

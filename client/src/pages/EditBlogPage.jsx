@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import the styles for the editor
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const EditBlogPage = () => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
-  const id = useLocation().pathname.split("/")[2];
+  const { id } = useParams();
   const [blog, setBlog] = useState({});
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
