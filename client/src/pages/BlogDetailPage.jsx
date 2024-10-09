@@ -100,7 +100,7 @@ const BlogDetailPage = () => {
               </div>
               <div>
                 <div
-                  className="text-gray-800 text-sm mt-4"
+                  className="text-gray-800 text-sm mt-4 ql-editor"
                   dangerouslySetInnerHTML={{ __html: blog.content }}
                 ></div>
               </div>

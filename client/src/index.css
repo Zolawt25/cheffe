@@ -4,3 +4,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Style the ReactQuill editor using Tailwind utilities */
+
+.ql-editor {
+  @apply text-gray-800 leading-relaxed;
+}
+
+.ql-editor h1 {
+  @apply text-4xl font-bold mt-4 mb-2;
+}
+
+.ql-editor h2 {
+  @apply text-3xl font-semibold mt-4 mb-2;
+}
+
+.ql-editor p {
+  @apply text-lg mb-4;
+}
+
+.ql-editor ul {
+  @apply list-disc ml-6;
+}
+
+.ql-editor ol {
+  @apply list-decimal ml-6;
+}
+
+.ql-editor blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic text-gray-600;
+}
